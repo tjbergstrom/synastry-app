@@ -1,0 +1,61 @@
+
+
+<style>
+  .datepicker {
+    width: 50%;
+    padding: 2px 2px;
+    margin: 0 0;
+    box-sizing: border-box;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    color: white;
+  }
+</style>
+
+{%extends "layout.html"%}
+{%block content%}
+
+<div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Enter Two Birthdays</legend>
+
+      <div class="form-group">
+        {{ form.bday1.label(class="datepicker") }}
+        {% if form.bday1.errors %}
+          {{ form.bday1(class="form-control form-control-lg is-invalid") }}
+          <div class ="invalid-feedback">
+            {% for error in form.bday1.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.bday1(class="datepicker form-control-lg") }}
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form.bday2.label(class="datepicker") }}
+        {% if form.bday1.errors %}
+          {{ form.bday2(class="form-control form-control-lg is-invalid") }}
+          <div class ="invalid-feedback">
+            {% for error in form.bday2.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.bday2(class="datepicker form-control-lg") }}
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+      </div>
+
+  </form>
+</div>
+
+{%endblock content%}
+
+

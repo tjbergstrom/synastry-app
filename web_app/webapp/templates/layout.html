@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>{% block title %}{% endblock %}AstroMatch</title>
+    <style>
+      /* Background*/
+      body {
+        background-image: url("https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=2000");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+      .videoElement {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 500px;
+        height: auto;
+        background: rgba(0, 0, 0, 0.88);
+        padding: 8px 8px 8px 8px;
+      }
+      /* Text */
+      .txtblock {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 500px;
+        height: auto;
+        color: white;
+        padding: 16px 16px 16px 16px;
+        background-color: #111;
+        background: rgba(0, 0, 0, 0.77);
+      }
+      /* Forms */
+      .content-section {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 500px;
+        height: auto;
+        padding: 16px 16px 16px 16px;
+        background: rgba(0, 0, 0, 0.77);
+        color: white;
+      }
+      .form-control {
+        width: 75%;
+        padding: 2px 2px;
+        margin: 0 0;
+        box-sizing: border-box;
+        border: none;
+        background-color: #333;
+        background: rgba(0, 0, 0, 0.77);
+        width: 100%;
+        color: white;
+      }
+      body {
+        font-family: "Lato", sans-serif;
+      }
+      /* Left side menu */
+      .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.77);
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+      .sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+      .sidebar a:hover {
+        color: #f1f1f1;
+      }
+      .sidebar .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+      .openbtn {
+        font-size: 20px;
+        cursor: pointer;
+        background-color: #111;
+        background: none;
+        color: black;
+        padding: 10px 15px;
+        border: none;
+      }
+      .openbtn:hover {
+        background-color: #444;
+        background: none;
+        color: white;
+      }
+      #main {
+        transition: margin-left .5s;
+        padding: 16px;
+      }
+      @media screen and (max-height: 450px) {
+        .sidebar {padding-top: 15px;}
+        .sidebar a {font-size: 18px;}
+      }
+      .button {
+        border: ridge;
+        color: gray;
+        padding: 8px 16px;
+        text-align: center;
+        font-size: 20px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        /*cursor: pointer;*/
+        background-color: #111;
+      }
+      input[type=url] {
+        width: 50%;
+        padding: 2px 2px;
+        margin: 0 0;
+        box-sizing: border-box;
+        border: none;
+        background-color: #222;
+        color: white;
+      }
+      /* Top nav bar */
+      .topnav {
+        overflow: hidden;
+        background-color: none;
+      }
+      .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        float: right;
+      }
+      .topnav a:hover {
+        background-color: none;
+        color: gray;
+      }
+      .topnav button.openbtn {
+        float: left;
+        color: white;
+      }
+      .topnav button.openbtn:hover {
+        color: gray;
+      }
+      .topnav a.active {
+        background-color: none;
+        color: white;
+        font-size: 42px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hidden/opened left side bar menu -->
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <!-- Menu links to other pages -->
+      <a class="nav-item nav-link" href="{{url_for('match')}}">Make a Match!</a>
+      <a class="nav-item nav-link" href="{{url_for('about')}}">About</a>
+      <a class="nav-item nav-link" href="{{url_for('questions')}}">Contact</a>
+      <a class="nav-item nav-link" href="{{url_for('questions')}}">Questions</a>
+      <a class="nav-item nav-link" href="{{url_for('blog')}}">Blog</a>
+    </div>
+    <div id="main">
+      <!-- Top menu bar -->
+      <div class="topnav">
+      <button class="openbtn" onclick="openNav()">☰</button>
+        <a class="active" href="/">AstroMatch</a>
+        {% if current_user.is_authenticated %}
+          <a class="nav-item nav-link" href="{{url_for('account')}}">Account</a>
+          <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a>
+        {% else %}
+          <a class="nav-item nav-link" href="{{url_for('login')}}">Login</a>
+          <a class="nav-item nav-link" href="{{url_for('register')}}">Register</a>
+        {% endif %}
+      </div>
+      {% block content %}
+      {% endblock %}
+    </div>
+    <script>
+      function openNav() {
+        document.getElementById("mySidebar").style.width = "256px";
+        document.getElementById("main").style.marginLeft = "256px";
+      }
+      function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+      }
+      function redirectStreamPage(streamType, streamSource) {
+        localStorage.streamType = streamType;
+        localStorage.streamSource = streamSource;
+        location.href = '/stream';
+      }
+    </script>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{category}}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
