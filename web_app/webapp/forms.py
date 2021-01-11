@@ -44,4 +44,9 @@ class MatchForm(FlaskForm):
     submit = SubmitField("Match!")
 
 
+class ChartForm(FlaskForm):
+    bday = DateField("", format="%Y-%m-%d")
+    submit = SubmitField("Calculate!")
+
+
 ##

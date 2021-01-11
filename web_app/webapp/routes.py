@@ -1,9 +1,10 @@
 from flask import render_template, url_for, flash, redirect, request
 from webapp import app, db, bcrypt
-from webapp.forms import RegistrationForm, SigninForm, QuestionForm, MatchForm
+from webapp.forms import RegistrationForm, SigninForm, QuestionForm, MatchForm, ChartForm
 from webapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from .syn_calc import *
+from .chart_calc import *
 
 @app.route("/")
 def home():
@@ -94,6 +95,16 @@ def match():
         #return redirect(url_for("match")) #f"{b1} {b2}"
     return render_template("match.html", form=form)
 
+
+
+@app.route("/chart", methods=["POST","GET"])
+def chart():
+    form = ChartForm()
+    if form.validate_on_submit():
+        bday = form.bday.data.strftime("%Y-%m-%d")
+        data = birthday_chart(bday)
+        return render_template("chart_calc.html", data=data, form=form)
+    return render_template("chart.html", form=form)
 
 
 ##
