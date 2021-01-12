@@ -4,7 +4,7 @@ from webapp.forms import RegistrationForm, SigninForm, QuestionForm, MatchForm, 
 from webapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from .syn_calc import *
-from .chart_calc import *
+
 
 @app.route("/")
 def home():
@@ -88,7 +88,7 @@ def match():
     if form.validate_on_submit():
         b1 = form.bday1.data.strftime("%Y-%m-%d")
         b2 = form.bday2.data.strftime("%Y-%m-%d")
-        data = synastry(b1, b2)
+        data = display_synastry(b1, b2)
         #result = (b1, b2)
         return render_template("matched.html", data=data, form=form)
         #render_template("matched.html",form_data=(b2, b2))
@@ -102,7 +102,7 @@ def chart():
     form = ChartForm()
     if form.validate_on_submit():
         bday = form.bday.data.strftime("%Y-%m-%d")
-        data = birthday_chart(bday)
+        data = display_single_chart(bday)
         return render_template("chart_calc.html", data=data, form=form)
     return render_template("chart.html", form=form)
 

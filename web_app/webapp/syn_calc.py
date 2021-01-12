@@ -1,10 +1,9 @@
-# astro2.py
-# may 25, 2020
+# syn_calc.py
+# Jan 2021
 #
-# this file takes two input birthdays
-# and calculates their synastry match
-# it's not perfect code,
-# but it's an intro to seeing the calculations work
+# Calculate birthcharts using my tables that I processed.
+# Use the birthcharts to display a single birth chart.
+# Calculate synastry matches between two charts.
 
 
 import os
@@ -23,30 +22,36 @@ nodefile = os.path.join(basedir, "static/tables/node_signs.csv")
 jupiterfile = os.path.join(basedir, "static/tables/jupiter_signs.csv")
 saturnfile = os.path.join(basedir, "static/tables/saturn_signs.csv")
 
-def synastry(d1, d2):
-	d1 += " 12:00"
-	d2 += " 12:00"
 
-	date1 = dt.datetime.strptime(d1, "%Y-%m-%d %H:%M")
-	date2 = dt.datetime.strptime(d2, "%Y-%m-%d %H:%M")
+def formatted(date):
+	return f"{date.month}-{date.day}-{date.year}"
 
-	# Calculate the sign of each planet for the first birthday
-	su1 = signs.get_sign(date1, sunfile)
-	mn1 = signs.get_moon(date1, moonfile)
-	v1 = signs.get_signs(date1, venusfile)
-	mr1 = signs.get_signs(date1, marsfile)
-	n1 = signs.get_sign(date1, nodefile)
-	j1 = signs.get_signs(date1, jupiterfile)
-	st1 = signs.get_sign(date1, saturnfile)
 
-	# And for the second birthday
-	su2 = signs.get_sign(date2, sunfile)
-	mn2 = signs.get_moon(date2, moonfile)
-	v2 = signs.get_signs(date2, venusfile)
-	mr2 = signs.get_signs(date2, marsfile)
-	n2 = signs.get_sign(date2, nodefile)
-	j2 = signs.get_signs(date2, jupiterfile)
-	st2 = signs.get_sign(date2, saturnfile)
+def birth_chart(date):
+	date += " 12:00"
+	date = dt.datetime.strptime(date, "%Y-%m-%d %H:%M")
+	sun = signs.get_sign(date, sunfile)
+	moon = signs.get_moon(date, moonfile)
+	venus = signs.get_signs(date, venusfile)
+	mars = signs.get_signs(date, marsfile)
+	node = signs.get_sign(date, nodefile)
+	jupiter = signs.get_signs(date, jupiterfile)
+	saturn = signs.get_sign(date, saturnfile)
+	return date, sun, moon, venus, mars, node, jupiter, saturn
+
+
+def display_single_chart(date):
+	date, sun, moon, venus, mars, node, jupiter, saturn = birth_chart(date)
+	data = {formatted(date) : [sun, moon, venus, mars, node, jupiter, saturn]}
+	df = pd.DataFrame(data=data)
+	df.index = ["sun", "moon", "venus", "mars", "north node", "jupiter", "saturn"]
+	return df.to_html()
+
+
+def display_synastry(date1, date2):
+	# Calculate the sign of each planet for the birthdays
+	date1, su1, mn1, v1, mr1, n1, j1, st1 = birth_chart(date1)
+	date2, su2, mn2, v2, mr2, n2, j2, st2 = birth_chart(date2)
 
 	# Calculate the aspects between the planets of the two birthdays
 	sun_sun = signs.calc(su1, su2)
@@ -90,17 +95,14 @@ def synastry(d1, d2):
 	mars_node = signs.calc(mr1, n2)
 	node_mars = signs.calc(n1, mr2)
 
-	# The following is kind of a brute force way of displaying everything
-
-	d1 = f"{date1.month}-{date1.day}-{date1.year}"
-	d2 = f"{date2.month}-{date2.day}-{date2.year}"
-
 	# Add the two birthcarts and the aspects to a dataframe
-	d = {d1:[su1, su1, mn1, su1, v1, su1, mr1, su1, j1, su1, st1, su1, n1, mn1, mn1, v1, mn1, mr1, mn1, j1, mn1, st1, mn1, n1, v1, v1, mr1, v1, j1, v1, st1, v1, n1, mr1, mr1, j1, mr1, st1, mr1, n1],
-	d2:[su2, mn2, su2, v2, su2, mr2, su2, j2, su2, st2, su2, n2, su2, mn2, v2, mn2, mr2, mn2, j2, mn2, st2, mn2, n2, mn2, v2, mr2, v2, j2, v2, st2, v2, n2, v2, mr2, j2, mr2, st2, mr2, n2, mr2],
-	'Aspect':[sun_sun, sun_moon, moon_sun, sun_venus, venus_sun, sun_mars, mars_sun, sun_jupiter, jupiter_sun, sun_saturn, saturn_sun, sun_node, node_sun, moon_moon, moon_venus, venus_moon, moon_mars, mars_moon, moon_jupiter, jupiter_moon, moon_saturn, saturn_moon, moon_node, node_moon, venus_venus, venus_mars, mars_venus, venus_jupiter, jupiter_venus, venus_saturn, saturn_venus, venus_node, node_venus, mars_mars, mars_jupiter, jupiter_mars, mars_saturn, saturn_mars, mars_node, node_mars]}
+	data = {
+		formatted(date1) : [su1, su1, mn1, su1, v1, su1, mr1, su1, j1, su1, st1, su1, n1, mn1, mn1, v1, mn1, mr1, mn1, j1, mn1, st1, mn1, n1, v1, v1, mr1, v1, j1, v1, st1, v1, n1, mr1, mr1, j1, mr1, st1, mr1, n1],
+		formatted(date2) : [su2, mn2, su2, v2, su2, mr2, su2, j2, su2, st2, su2, n2, su2, mn2, v2, mn2, mr2, mn2, j2, mn2, st2, mn2, n2, mn2, v2, mr2, v2, j2, v2, st2, v2, n2, v2, mr2, j2, mr2, st2, mr2, n2, mr2],
+		'Aspect' : [sun_sun, sun_moon, moon_sun, sun_venus, venus_sun, sun_mars, mars_sun, sun_jupiter, jupiter_sun, sun_saturn, saturn_sun, sun_node, node_sun, moon_moon, moon_venus, venus_moon, moon_mars, mars_moon, moon_jupiter, jupiter_moon, moon_saturn, saturn_moon, moon_node, node_moon, venus_venus, venus_mars, mars_venus, venus_jupiter, jupiter_venus, venus_saturn, saturn_venus, venus_node, node_venus, mars_mars, mars_jupiter, jupiter_mars, mars_saturn, saturn_mars, mars_node, node_mars]
+	}
 
-	df = pd.DataFrame(data=d)
+	df = pd.DataFrame(data=data)
 
 	# Add the planet matches to the dataframe
 	df.index = ['sun+sun', 'sun+moon', 'moon+sun', 'sun+venus', 'venus+sun', 'sun+mars', 'mars+sun', 'sun+jupiter', 'jupiter+sun', 'sun+saturn', 'saturn+sun', 'sun+node', 'node+sun', 'moon+moon', 'moon+venus', 'venus+moon', 'moon+mars', 'mars+moon', 'moon+jupiter', 'jupiter+moon', 'moon+saturn', 'saturn+moon', 'moon+node', 'node+moon', 'venus+venus', 'venus+mars', 'mars+venus', 'venus+jupiter', 'jupiter+venus', 'venus+saturn', 'saturn+venus', 'venus+node', 'node+venus', 'mars+mars', 'mars+jupiter', 'jupiter+mars', 'mars+saturn', 'saturn+mars', 'mars+node', 'node+mars']
