@@ -154,6 +154,8 @@ def calcs(p, q):
 # to make the calculation code very simple
 def calc(s1, s2):
     signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+    if s1 not in signs or s2 not in signs:
+        return "Birthday out of range"
     p1 = signs.index(s1) + 1
     p2 = signs.index(s2) + 1
     if p1 == p2:
