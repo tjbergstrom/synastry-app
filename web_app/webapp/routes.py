@@ -88,7 +88,7 @@ def match():
     if form.validate_on_submit():
         b1 = form.bday1.data.strftime("%Y-%m-%d")
         b2 = form.bday2.data.strftime("%Y-%m-%d")
-        data = display_synastry(b1, b2)
+        data = display_synastry_cleaner_code(b1, b2)
         #result = (b1, b2)
         return render_template("matched.html", data=data, form=form)
         #render_template("matched.html",form_data=(b2, b2))
