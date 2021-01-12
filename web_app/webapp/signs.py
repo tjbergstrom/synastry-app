@@ -133,21 +133,23 @@ def get_moon(date, input_file):
 # calculate the synastry aspects between two planets
 # it's actually very logical/mathematical and programmable
 def calcs(p, q):
+    if p == q:
+        return "Conjunct ❤️"
     # opposites are six signs apart
-    if p - q == 6:
-        return "Opposite"
+    elif p - q == 6:
+        return "Opposite 💘"
     # trines are three signs apart
     elif (p - q) % 4 == 0:
-        return "Trine"
+        return "Trine 💖"
     # sextiles are two signs apart
     elif (p - q) % 2 == 0:
-        return "Sextile"
+        return "Sextile 💕"
     # squares are four signs apart
     elif (p - q) % 3 == 0:
-        return "Square"
+        return "Square 💔"
     # anything else is a quincunx
     else:
-        return "Quincunx"
+        return "Quincunx 🖤"
 
 
 # calculating the aspects requires some specification
@@ -158,8 +160,6 @@ def calc(s1, s2):
         return "Birthday out of range"
     p1 = signs.index(s1) + 1
     p2 = signs.index(s2) + 1
-    if p1 == p2:
-        return "Conjunct"
     if p1 > p2:
         return calcs(p1, p2)
     else:

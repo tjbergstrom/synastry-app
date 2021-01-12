@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}AstroMatch</title>
     <style>
-      /* Background*/
+      /* Background */
       body {
         background-image: url("https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=2000");
         background-repeat: no-repeat;
@@ -38,6 +38,8 @@
         background-color: #111;
         background: rgba(0, 0, 0, 0.77);
         font-size: 16px;
+        height: 550px;
+        overflow: auto;
       }
       /* Forms */
       .content-section {
@@ -170,18 +172,16 @@
         font-size: 42px;
         float: left;
       }
-
       /* Dates selection */
-  .datepicker {
-    width: 50%;
-    padding: 2px 2px;
-    margin: 0 0;
-    box-sizing: border-box;
-    border: none;
-    background: rgba(0, 0, 0, 0.55);
-    color: white;
-  }
-
+      .datepicker {
+        width: 50%;
+        padding: 2px 2px;
+        margin: 0 0;
+        box-sizing: border-box;
+        border: none;
+        background: rgba(0, 0, 0, 0.55);
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -190,6 +190,7 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
       <!-- Menu links to other pages -->
       <a class="nav-item nav-link" href="{{url_for('match')}}">Make a Match!</a>
+      <a class="nav-item nav-link" href="{{url_for('chart')}}">Birth Chart</a>
       <a class="nav-item nav-link" href="{{url_for('about')}}">About</a>
       <a class="nav-item nav-link" href="{{url_for('questions')}}">Contact</a>
       <a class="nav-item nav-link" href="{{url_for('questions')}}">Questions</a>

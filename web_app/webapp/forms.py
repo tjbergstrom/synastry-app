@@ -4,7 +4,10 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from webapp.models import User
 from flask_wtf import Form
 from wtforms.fields.html5 import DateField
+import datetime as dt
 
+
+default_date = dt.datetime.strptime("1990-01-01", "%Y-%m-%d")
 
 class RegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20)])
@@ -39,14 +42,15 @@ class QuestionForm(FlaskForm):
 
 
 class MatchForm(FlaskForm):
-    bday1 = DateField("", format="%Y-%m-%d")
-    bday2 = DateField("", format="%Y-%m-%d")
+    bday1 = DateField("", format="%Y-%m-%d", default=default_date)
+    bday2 = DateField("", format="%Y-%m-%d", default=default_date)
     submit = SubmitField("Match!")
 
 
 class ChartForm(FlaskForm):
-    bday = DateField("", format="%Y-%m-%d")
+    bday = DateField("", format="%Y-%m-%d", default=default_date)
     submit = SubmitField("Calculate!")
+
 
 
 ##

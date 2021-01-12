@@ -1,6 +1,6 @@
 
 
-Just brushing up on some web development, with an idea I've had for a while - input two birthdays and get the astrology compatibility between them. Gonna need to do a lot more work on testing, security, and backend database stuff.
+Just brushing up on some web development, with an idea I've had for a while - input two birthdays and get the astrology compatibility between them. Gonna need to do a lot more work on testing, security, and backend database stuff. And design.
 
 <br>
 <br>
