@@ -64,7 +64,6 @@ def account():
     return render_template("account.html", title="Account")
 
 
-
 @app.route("/questions", methods=["GET", "POST"])
 def questions():
     form = QuestionForm()
@@ -74,12 +73,9 @@ def questions():
     return render_template("questions.html", title="Question", form=form)
 
 
-
 @app.route("/html")
-#@login_required
 def blog():
     return render_template("html.html", title="Blog")
-
 
 
 @app.route("/match", methods=["POST","GET"])
@@ -89,12 +85,8 @@ def match():
         b1 = form.bday1.data.strftime("%Y-%m-%d")
         b2 = form.bday2.data.strftime("%Y-%m-%d")
         data = display_synastry_cleaner_code(b1, b2)
-        #result = (b1, b2)
         return render_template("matched.html", data=data, form=form)
-        #render_template("matched.html",form_data=(b2, b2))
-        #return redirect(url_for("match")) #f"{b1} {b2}"
     return render_template("match.html", form=form)
-
 
 
 @app.route("/chart", methods=["POST","GET"])
@@ -105,6 +97,7 @@ def chart():
         data = display_single_chart(bday)
         return render_template("chart_calc.html", data=data, form=form)
     return render_template("chart.html", form=form)
+
 
 
 ##

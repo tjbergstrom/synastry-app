@@ -7,8 +7,6 @@ from wtforms.fields.html5 import DateField
 import datetime as dt
 
 
-default_date = dt.datetime.strptime("1990-01-01", "%Y-%m-%d")
-
 class RegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20)])
     email = StringField("Email", validators=[DataRequired()])
@@ -41,14 +39,18 @@ class QuestionForm(FlaskForm):
     submit = SubmitField("Send", validators=[DataRequired()])
 
 
+def default_date():
+    return dt.datetime.strptime("1990-01-01", "%Y-%m-%d")
+
+
 class MatchForm(FlaskForm):
-    bday1 = DateField("", format="%Y-%m-%d", default=default_date)
-    bday2 = DateField("", format="%Y-%m-%d", default=default_date)
+    bday1 = DateField("", format="%Y-%m-%d", default=default_date())
+    bday2 = DateField("", format="%Y-%m-%d", default=default_date())
     submit = SubmitField("Match!")
 
 
 class ChartForm(FlaskForm):
-    bday = DateField("", format="%Y-%m-%d", default=default_date)
+    bday = DateField("", format="%Y-%m-%d", default=default_date())
     submit = SubmitField("Calculate!")
 
 
