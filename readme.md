@@ -1,6 +1,10 @@
 
 
-Just brushing up on some web development, with an idea I've had for a while - input two birthdays and get the astrology compatibility between them. Gonna need to do a lot more work on testing, security, and backend database stuff. And design.
+Just brushing up on some web app development, with an idea I've had for a while - input two birthdays and get the astrology compatibility between them.
+
+<br>
+
+```$ python3 web_app/run.py``` to start a server and check it out.
 
 <br>
 <br>

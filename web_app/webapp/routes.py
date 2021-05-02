@@ -49,10 +49,10 @@ def synastry():
             form.mercury2.data, form.venus2.data, form.mars2.data,
             form.jupiter2.data, form.saturn2.data, form.node2.data,
         ]
-
         data = full_chart(chart1, chart2)
         return render_template("matched.html", data=data, form=form)
     return render_template("synastry.html", form=form)
+
 
 
 ##
