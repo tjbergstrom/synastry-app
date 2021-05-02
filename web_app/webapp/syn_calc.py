@@ -83,8 +83,8 @@ def full_chart(chart1, chart2):
 	signs1 = []
 	signs2 = []
 	idx = []
-	for i in range(9):
-		for j in range(9):
+	for i in range(0, 9):
+		for j in range(i, 9):
 			aspects.append(signs.calc(chart1[i], chart2[j]))
 			signs1.append(chart1[i])
 			signs2.append(chart2[j])
@@ -101,6 +101,7 @@ def full_chart(chart1, chart2):
 	}
 	df = pd.DataFrame(data=data)
 	df.index = idx
+	df = df.loc[df["Aspect"] != ""]
 	return df.to_html()
 
 
