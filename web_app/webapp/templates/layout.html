@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}AstroMatch</title>
     <style>
@@ -23,7 +21,7 @@
         margin-right: auto;
         width: 500px;
         height: auto;
-        background: rgba(0, 0, 0, 0.88);
+        background: rgba(0, 0, 0, 0.77);
         padding: 8px 8px 8px 8px;
       }
       /* Text */
@@ -36,7 +34,7 @@
         color: white;
         padding: 16px 16px 16px 16px;
         background-color: #111;
-        background: rgba(0, 0, 0, 0.77);
+        background: rgba(0, 0, 0, 0.66);
         font-size: 16px;
         height: 550px;
         overflow: auto;
@@ -49,7 +47,7 @@
         width: 500px;
         height: auto;
         padding: 16px 16px 16px 16px;
-        background: rgba(0, 0, 0, 0.77);
+        background: rgba(0, 0, 0, 0.66);
         color: white;
       }
       .form-control {
@@ -59,7 +57,7 @@
         box-sizing: border-box;
         border: none;
         background-color: #333;
-        background: rgba(0, 0, 0, 0.77);
+        background: rgba(0, 0, 0, 0.66);
         width: 100%;
         color: white;
       }
@@ -74,7 +72,7 @@
         z-index: 1;
         top: 0;
         left: 0;
-        background: rgba(0, 0, 0, 0.77);
+        background: rgba(0, 0, 0, 0.66);
         overflow-x: hidden;
         transition: 0.5s;
         padding-top: 60px;
@@ -189,25 +187,17 @@
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
       <!-- Menu links to other pages -->
-      <a class="nav-item nav-link" href="{{url_for('match')}}">Make a Match!</a>
+      <a class="nav-item nav-link" href="{{url_for('match')}}">Match Two Birthdays</a>
       <a class="nav-item nav-link" href="{{url_for('chart')}}">Birth Chart</a>
       <a class="nav-item nav-link" href="{{url_for('about')}}">About</a>
-      <a class="nav-item nav-link" href="{{url_for('questions')}}">Contact</a>
-      <a class="nav-item nav-link" href="{{url_for('questions')}}">Questions</a>
-      <a class="nav-item nav-link" href="{{url_for('blog')}}">Blog</a>
     </div>
     <div id="main">
       <!-- Top menu bar -->
       <div class="topnav">
       <button class="openbtn" onclick="openNav()">☰</button>
         <a class="active" href="/">AstroMatch</a>
-        {% if current_user.is_authenticated %}
-          <a class="nav-item nav-link" href="{{url_for('account')}}">Account</a>
-          <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a>
-        {% else %}
-          <a class="nav-item nav-link" href="{{url_for('login')}}">Login</a>
-          <a class="nav-item nav-link" href="{{url_for('register')}}">Register</a>
-        {% endif %}
+        <a class="nav-item nav-link" href="/">Login</a>
+        <a class="nav-item nav-link" href="/">Register</a>
       </div>
       {% block content %}
       {% endblock %}
