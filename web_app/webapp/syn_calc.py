@@ -77,5 +77,32 @@ def display_synastry_cleaner_code(date1, date2):
 	return df.to_html()
 
 
+def full_chart(chart1, chart2):
+	planets = ["sun", "moon", "rising", "mercury", "venus", "mars", "jupiter", "saturn", "node"]
+	aspects = []
+	signs1 = []
+	signs2 = []
+	idx = []
+	for i in range(9):
+		for j in range(9):
+			aspects.append(signs.calc(chart1[i], chart2[j]))
+			signs1.append(chart1[i])
+			signs2.append(chart2[j])
+			idx.append(f"{planets[i]}+{planets[j]}")
+			if i != j:
+				aspects.append(signs.calc(chart1[j], chart2[i]))
+				signs1.append(chart1[j])
+				signs2.append(chart2[i])
+				idx.append(f"{planets[j]}+{planets[i]}")
+	data = {
+		"chart1" : signs1,
+		"chart2" : signs2,
+		"Aspect" : aspects,
+	}
+	df = pd.DataFrame(data=data)
+	df.index = idx
+	return df.to_html()
+
+
 
 ##
