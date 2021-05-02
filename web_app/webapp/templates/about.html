@@ -3,13 +3,19 @@
 {%extends "layout.html"%}
 {%block content%}
 <div class='txtblock'>
-  <legend class="border-bottom mb-4">About</legend>
+  <legend style="color:white" class="border-bottom mb-4"><b>About</b></legend>
   <p>This is just a fun way to see the synastry match between birthdays. How compatible are you?</p>
-  <p>You can try out "Match Two Birthdays" by inputting your birthday and someone else's, and see how compatible you are. </p>
-  <p>If you already know your full chart, you can try "Match Two Charts" and manually enter each planet from each chart. You can find a better birth chart at 
+  <p>You can try out 
+    <a href="{{url_for('match')}}">Match Two Birthdays</a>
+    by inputting your birthday and someone else's, and see how compatible you are. </p>
+  <p>If you already know your full chart, you can try 
+    <a href="{{url_for('synastry')}}">Match Two Charts</a>
+    and manually enter each planet from each chart. You can reference a more detailed birth chart at 
     <a href="https://alabe.com/freechart/default.asp">Alabe</a>.
   </p>
-  <p>You can also use the birth chart calculator to see your or someone else's birthchart. I made my own calculator based on as much data as I could find, and it might not be extremely accurate. It's the same calculator used by the "Match Two Birthdays" synastry calculator.</p>
+  <p>You can also use the 
+    <a href="{{url_for('chart')}}">birth chart calculator</a>
+    to see your or someone else's birthchart. I made my own calculator based on as much data as I could find, and it might not be extremely accurate. It's the same calculator used by the "Match Two Birthdays" synastry calculator.</p>
   <br></br>
 </div>
 {%endblock content%}
