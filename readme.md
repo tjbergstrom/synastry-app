@@ -4,25 +4,31 @@ Just brushing up on some web app development, with an idea I've had for a while 
 
 <br>
 
-```$ python3 web_app/run.py``` to start a server and check it out.
+If it's still up, you can check it out at https://astro--match.herokuapp.com/
+
+[https://astro--match.herokuapp.com/](https://astro--match.herokuapp.com/)
 
 <br>
 <br>
 
-![alt text](https://raw.githubusercontent.com/tjbergstrom/synastry-app/main/web_app/webapp/static/assets/screencap0.png)
+![alt text](https://raw.githubusercontent.com/tjbergstrom/synastry-app/main/web_app/app/static/assets/screencap0.png)
 
 
 <br>
 <br>
 
-![alt text](https://raw.githubusercontent.com/tjbergstrom/synastry-app/main/web_app/webapp/static/assets/screencap1.png)
+![alt text](https://raw.githubusercontent.com/tjbergstrom/synastry-app/main/web_app/app/static/assets/screencap1.png)
 
 <br>
 <br>
 
-![alt text](https://raw.githubusercontent.com/tjbergstrom/synastry-app/main/web_app/webapp/static/assets/screencap2.png)
+![alt text](https://raw.githubusercontent.com/tjbergstrom/synastry-app/main/web_app/app/static/assets/screencap2.png)
 
 <br>
 <br>
 
+![alt text](https://raw.githubusercontent.com/tjbergstrom/synastry-app/main/web_app/app/static/assets/screencap3.png)
+
+<br>
+<br>
 
