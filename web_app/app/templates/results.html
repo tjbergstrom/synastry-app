@@ -4,9 +4,9 @@
 {%block content%}
 
 <div class="txtblock">
-  <legend style="color:white" class="border-bottom mb-4"><b>Your Birth Chart</b></legend>
+  <legend style="color:white" class="border-bottom mb-4"><b>{{ label }}</b></legend>
   <div>
-	{{data | safe}}
+    {{ data | safe }}
   </div>
 </div>
 

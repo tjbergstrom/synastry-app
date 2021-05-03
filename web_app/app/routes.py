@@ -21,7 +21,8 @@ def match():
         b1 = form.bday1.data.strftime("%Y-%m-%d")
         b2 = form.bday2.data.strftime("%Y-%m-%d")
         data = display_synastry_chart(b1, b2)
-        return render_template("matched.html", data=data, form=form)
+        label = "Your Match Results"
+        return render_template("results.html", label=label, data=data, form=form)
     return render_template("match.html", form=form)
 
 
@@ -31,7 +32,8 @@ def chart():
     if form.validate_on_submit():
         bday = form.bday.data.strftime("%Y-%m-%d")
         data = display_single_chart(bday)
-        return render_template("chart_calc.html", data=data, form=form)
+        label = "Your Birth Chart"
+        return render_template("results.html", label=label, data=data, form=form)
     return render_template("chart.html", form=form)
 
 
@@ -50,7 +52,8 @@ def synastry():
             form.jupiter2.data, form.saturn2.data, form.node2.data,
         ]
         data = full_charts(chart1, chart2)
-        return render_template("matched.html", data=data, form=form)
+        label = "Your Match Results"
+        return render_template("results.html", label=label, data=data, form=form)
     return render_template("synastry.html", form=form)
 
 
