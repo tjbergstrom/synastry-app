@@ -6,8 +6,6 @@ Just brushing up on some web app development, with an idea I've had for a while 
 
 If it's still up, you can check it out at https://astro--match.herokuapp.com/
 
-[https://astro--match.herokuapp.com/](https://astro--match.herokuapp.com/)
-
 <br>
 <br>
 
