@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
-from webapp import app, db, bcrypt
-from webapp.forms import MatchForm, ChartForm, SynastryForm
+from app import app
+from app.forms import MatchForm, ChartForm, SynastryForm
 from .syn_calc import *
 
 
@@ -20,7 +20,7 @@ def match():
     if form.validate_on_submit():
         b1 = form.bday1.data.strftime("%Y-%m-%d")
         b2 = form.bday2.data.strftime("%Y-%m-%d")
-        data = display_synastry_cleaner_code(b1, b2)
+        data = display_synastry_chart(b1, b2)
         return render_template("matched.html", data=data, form=form)
     return render_template("match.html", form=form)
 
@@ -49,7 +49,7 @@ def synastry():
             form.mercury2.data, form.venus2.data, form.mars2.data,
             form.jupiter2.data, form.saturn2.data, form.node2.data,
         ]
-        data = full_chart(chart1, chart2)
+        data = full_charts(chart1, chart2)
         return render_template("matched.html", data=data, form=form)
     return render_template("synastry.html", form=form)
 

@@ -1,8 +1,7 @@
 # signs.py
 # may 26, 2020
 #
-# this file does the work of parsing the sign tables
-# and calculating the aspects between planets
+# Parse the sign tables and calculate aspects between planets.
 
 
 import csv
@@ -10,8 +9,7 @@ import pandas as pd
 import datetime as dt
 
 
-# read a file containing all the signs of a planet
-# and get the sign for the given birthday
+# Read the file with all the signs and get the sign for the birthday
 def get_sign(date, input_file):
     year = date.year
     df = pd.read_csv(input_file)
@@ -28,9 +26,7 @@ def get_sign(date, input_file):
     return sign
 
 
-# some of the files are more challenging to parse
-# this also finds the sign for a given birthday
-# but with hour and minute precision
+# Get the sign from files that have hour and minute precision
 def get_signs(date, input_file):
     year = date.year
     df = pd.read_csv(input_file)
@@ -60,9 +56,7 @@ def get_signs(date, input_file):
     return sign
 
 
-# getting the moon sign is even more challenging
-# it needs to be much more precise
-# but it is totally do-able
+# Get the moon sign, much more precise
 def get_moon(date, input_file):
     year = date.year
     month = date.month
@@ -116,7 +110,7 @@ def get_moon(date, input_file):
             if mo == m:
                 m = i
             i += 1
-        date_and_time = str(y)+"-"+str(m)+"-"+str(d)+" "+t
+        date_and_time = f"{y}-{m}-{d} {t}"
         new_date = dt.datetime.strptime(date_and_time,"%Y-%m-%d %H:%M")
         if new_date <= date:
             sign = label.capitalize()
@@ -130,8 +124,7 @@ def get_moon(date, input_file):
     return sign
 
 
-# calculate the synastry aspects between two planets
-# it's actually very logical/mathematical and programmable
+# Calculate the synastry aspect between two planets
 def calcs(p, q):
     if p == q:
         return "Conjunct ❤️"
@@ -152,8 +145,7 @@ def calcs(p, q):
         return "Quincunx 🖤"
 
 
-# calculating the aspects requires some specification
-# to make the calculation code very simple
+# Make the calculation easier
 def calc(s1, s2):
     signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
     if s1 not in signs or s2 not in signs:

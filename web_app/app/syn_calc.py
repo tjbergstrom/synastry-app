@@ -1,9 +1,8 @@
 # syn_calc.py
 # Jan 2021
 #
-# Calculate birthcharts using my tables that I processed.
-# Use the birthcharts to display a single birth chart.
-# Calculate synastry matches between two charts.
+# Calculate birthcharts using the tables that I processed,
+# And calculate synastry matches between charts.
 
 
 import os
@@ -48,7 +47,7 @@ def display_single_chart(date):
 	return df.to_html()
 
 
-def display_synastry_cleaner_code(date1, date2):
+def display_synastry_chart(date1, date2):
 	# Calculate each birthchart
 	date1, su1, mn1, v1, mr1, n1, j1, st1 = birth_chart(date1)
 	date2, su2, mn2, v2, mr2, n2, j2, st2 = birth_chart(date2)
@@ -77,7 +76,7 @@ def display_synastry_cleaner_code(date1, date2):
 	return df.to_html()
 
 
-def full_chart(chart1, chart2):
+def full_charts(chart1, chart2):
 	planets = ["sun", "moon", "rising", "mercury", "venus", "mars", "jupiter", "saturn", "node"]
 	aspects = []
 	signs1 = []
