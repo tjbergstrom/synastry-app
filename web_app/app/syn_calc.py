@@ -10,6 +10,7 @@ from . import signs
 import pandas as pd
 import datetime as dt
 import urllib.request
+from datetime import timedelta
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -26,9 +27,10 @@ def formatted(date):
 	return f"{date.month}-{date.day}-{date.year}"
 
 
-def birth_chart(date):
-	date += " 12:00"
+def birth_chart(date, h=12, t=0):
+	date += f" {h}:00"
 	date = dt.datetime.strptime(date, "%Y-%m-%d %H:%M")
+	date += timedelta(hours=-t)
 	sun = signs.get_sign(date, sunfile)
 	moon = signs.get_moon(date, moonfile)
 	venus = signs.get_signs(date, venusfile)
@@ -47,9 +49,11 @@ def display_single_chart(date):
 	return df.to_html()
 
 
-def display_synastry_chart(date1, date2):
-	date1, chart1 = birth_chart(date1)[0], birth_chart(date1)[1:]
-	date2, chart2 = birth_chart(date2)[0], birth_chart(date2)[1:]
+def display_synastry_chart(date1, h1, t1, date2, h2, t2):
+	chart1 = birth_chart(date1, h1, t1)
+	date1, chart1 = chart1[0], chart1[1:]
+	chart2 = birth_chart(date2, h2, t2)
+	date2, chart2 = chart2[0], chart2[1:]
 	return full_charts(chart1, chart2, formatted(date1), formatted(date2), False)
 
 

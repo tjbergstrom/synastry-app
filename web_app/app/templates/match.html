@@ -21,7 +21,14 @@
         {% else %}
           {{ form.bday1(class="datepicker form-control-lg") }}
         {% endif %}
+        <br>
+        {{ form.bday1_hr.label }}
+        {{ form.bday1_hr }}
+        <br>
+        {{ form.bday1_tz.label }}
+        {{ form.bday1_tz }}
       </div>
+      <br>
 
       <div class="form-group">
         {{ form.bday2.label(class="datepicker") }}
@@ -35,7 +42,14 @@
         {% else %}
           {{ form.bday2(class="datepicker form-control-lg") }}
         {% endif %}
+        <br>
+        {{ form.bday2_hr.label }}
+        {{ form.bday2_hr }}
+        <br>
+        {{ form.bday2_tz.label }}
+        {{ form.bday2_tz }}
       </div>
+      <br>
 
       <div class="form-group">
         {{ form.submit(class="btn btn-outline-info") }}
