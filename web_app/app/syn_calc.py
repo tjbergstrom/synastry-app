@@ -48,42 +48,21 @@ def display_single_chart(date):
 
 
 def display_synastry_chart(date1, date2):
-	# Calculate each birthchart
-	date1, su1, mn1, v1, mr1, n1, j1, st1 = birth_chart(date1)
-	date2, su2, mn2, v2, mr2, n2, j2, st2 = birth_chart(date2)
-
-	# The combinations of planets to consider
-	signs1 = [su1, su1, mn1, su1, v1, su1, mr1, su1, j1, su1, st1, su1, n1, mn1, mn1, v1, mn1, mr1, mn1, j1, mn1, st1, mn1, n1, v1, v1, mr1, v1, j1, v1, st1, v1, n1, mr1, mr1, j1, mr1, st1, mr1, n1]
-	signs2 = [su2, mn2, su2, v2, su2, mr2, su2, j2, su2, st2, su2, n2, su2, mn2, v2, mn2, mr2, mn2, j2, mn2, st2, mn2, n2, mn2, v2, mr2, v2, j2, v2, st2, v2, n2, v2, mr2, j2, mr2, st2, mr2, n2, mr2]
-
-	# Calculate the aspects between each combination of planets
-	aspects = []
-	for i, j in zip(signs1, signs2):
-		aspects.append(signs.calc(i, j))
-
-	# Add the birthcart combinations and aspects to a dataframe
-	data = {
-		formatted(date1) : signs1,
-		formatted(date2) : signs2,
-		"Aspect" : aspects,
-	}
-
-	df = pd.DataFrame(data=data)
-
-	# Add the planet match names index to the dataframe
-	df.index = ['sun+sun', 'sun+moon', 'moon+sun', 'sun+venus', 'venus+sun', 'sun+mars', 'mars+sun', 'sun+jupiter', 'jupiter+sun', 'sun+saturn', 'saturn+sun', 'sun+node', 'node+sun', 'moon+moon', 'moon+venus', 'venus+moon', 'moon+mars', 'mars+moon', 'moon+jupiter', 'jupiter+moon', 'moon+saturn', 'saturn+moon', 'moon+node', 'node+moon', 'venus+venus', 'venus+mars', 'mars+venus', 'venus+jupiter', 'jupiter+venus', 'venus+saturn', 'saturn+venus', 'venus+node', 'node+venus', 'mars+mars', 'mars+jupiter', 'jupiter+mars', 'mars+saturn', 'saturn+mars', 'mars+node', 'node+mars']
-
-	return df.to_html()
+	date1, chart1 = birth_chart(date1)[0], birth_chart(date1)[1:]
+	date2, chart2 = birth_chart(date2)[0], birth_chart(date2)[1:]
+	return full_charts(chart1, chart2, formatted(date1), formatted(date2), False)
 
 
-def full_charts(chart1, chart2):
+def full_charts(chart1, chart2, label1='chart1', label2='chart2', full=True):
 	planets = ["sun", "moon", "rising", "mercury", "venus", "mars", "jupiter", "saturn", "node"]
+	if not full:
+		planets = ["sun", "moon", "venus", "mars", "jupiter", "saturn", "node"]
 	aspects = []
 	signs1 = []
 	signs2 = []
 	idx = []
-	for i in range(0, 9):
-		for j in range(i, 9):
+	for i in range(0, len(planets)):
+		for j in range(i, len(planets)):
 			aspects.append(signs.calc(chart1[i], chart2[j]))
 			signs1.append(chart1[i])
 			signs2.append(chart2[j])
@@ -94,8 +73,8 @@ def full_charts(chart1, chart2):
 				signs2.append(chart2[i])
 				idx.append(f"{planets[j]}+{planets[i]}")
 	data = {
-		"chart1" : signs1,
-		"chart2" : signs2,
+		label1 : signs1,
+		label2 : signs2,
 		"Aspect" : aspects,
 	}
 	df = pd.DataFrame(data=data)
