@@ -1,6 +1,6 @@
 # conv_tz.py
 # May 2021
-# Convert the tables to UTC timezone
+# Convert the tables to UTC-0 timezone.
 # (All the tables I found were in UTC-5)
 
 
@@ -54,6 +54,3 @@ conv("venus_signs.csv")
 
 
 ##
-
-
-
