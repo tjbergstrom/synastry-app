@@ -33,7 +33,8 @@ def chart():
     form = ChartForm()
     if form.validate_on_submit():
         bday = form.bday.data.strftime("%Y-%m-%d")
-        data = display_single_chart(bday)
+        hr, tz = form.hr.data, form.tz.data
+        data = display_single_chart(bday, hr, tz)
         return render_template("results.html", label="Your Birth Chart", data=data)
     return render_template("chart.html", form=form)
 

@@ -21,7 +21,14 @@
         {% else %}
           {{ form.bday(class="datepicker form-control-lg") }}
         {% endif %}
+        <br>
+        {{ form.hr.label }}
+        {{ form.hr }}
+        <br>
+        {{ form.tz.label }}
+        {{ form.tz }}
       </div>
+      <br>
 
       <div class="form-group">
         {{ form.submit(class="btn btn-outline-info") }}

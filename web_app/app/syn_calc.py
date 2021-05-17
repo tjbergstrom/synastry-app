@@ -41,9 +41,9 @@ def birth_chart(date, h=12, t=0):
 	return date, sun, moon, venus, mars, node, jupiter, saturn
 
 
-def display_single_chart(date):
-	date, sun, moon, venus, mars, node, jupiter, saturn = birth_chart(date)
-	data = {formatted(date) : [sun, moon, venus, mars, node, jupiter, saturn]}
+def display_single_chart(date, hr, tz):
+	chart = birth_chart(date, hr, tz)
+	data = {formatted(chart[0]) : chart[1:]}
 	df = pd.DataFrame(data=data)
 	df.index = ["sun", "moon", "venus", "mars", "north node", "jupiter", "saturn"]
 	return df.to_html()
@@ -60,7 +60,7 @@ def display_synastry_chart(date1, h1, t1, date2, h2, t2):
 def full_charts(chart1, chart2, label1='chart1', label2='chart2', full=True):
 	planets = ["sun", "moon", "rising", "mercury", "venus", "mars", "jupiter", "saturn", "node"]
 	if not full:
-		planets = ["sun", "moon", "venus", "mars", "jupiter", "saturn", "node"]
+		planets = ["sun", "moon", "venus", "mars", "node", "jupiter", "saturn"]
 	aspects = []
 	signs1 = []
 	signs2 = []

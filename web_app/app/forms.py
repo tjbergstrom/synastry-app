@@ -11,8 +11,8 @@ def default_date():
     return dt.datetime.strptime("1990-01-01", "%Y-%m-%d")
 
 
-class MatchForm(FlaskForm):
-    hrs = [
+def hours():
+    return [
         (0, '12:00am'), (1, '1:00am'), (2, '2:00am'), (3, '3:00am'),
         (4, '4:00am'), (5, '5:00am'), (6, '6:00am'), (7, '7:00am'),
         (8, '8:00am'), (9, '9:00am'), (10, '10:00am'), (11, '11:00am'),
@@ -20,7 +20,10 @@ class MatchForm(FlaskForm):
         (16, '4:00pm'), (17, '5:00pm'), (18, '6:00pm'), (19, '7:00pm'),
         (20, '8:00pm'), (21, '9:00pm'), (22, '10:00pm'), (23, '11:00pm')
     ]
-    tzones = [
+
+
+def timezones():
+    return [
         (-11, 'UTC−11:00 American Samoa'), (-10, 'UTC−10:00 Hawaii'), (-9, 'UTC−09:00 Alaska'),
         (-8, 'UTC−08:00 Seattle'), (-7, 'UTC−07:00 Denver'), (-6, 'UTC−06:00 Mexico City'),
         (-5, 'UTC−05:00 New York'), (-4, 'UTC−04:00 Nova Scotia'), (-3, 'UTC−03:00 Buenos Aires'),
@@ -31,6 +34,23 @@ class MatchForm(FlaskForm):
         (10, 'UTC+10:00 Sydney'), (11, 'UTC+11:00 Vanuatu'), (12, 'UTC+12:00 Auckland'),
         (13, 'UTC+13:00 Samoa'), (14, 'UTC+14:00 Kiribati')
     ]
+
+
+def signs():
+    return [
+        ('', ''),
+        ('Aries', 'Aries'), ('Taurus', 'Taurus'),
+        ('Cancer', 'Cancer'), ('Gemini', 'Gemini'),
+        ('Leo', 'Leo'), ('Virgo', 'Virgo'),
+        ('Libra', 'Libra'), ('Scorpio', 'Scorpio'),
+        ('Sagittarius', 'Sagittarius'), ('Capricorn', 'Capricorn'),
+        ('Aquarius', 'Aquarius'), ('Pisces', 'Pisces'),
+    ]
+
+
+class MatchForm(FlaskForm):
+    hrs = hours()
+    tzones = timezones()
     bday1 = DateField("Birth Date", format="%Y-%m-%d", default=default_date())
     bday1_hr = SelectField("Birth Hour", choices=hrs, default=hrs[12][0], coerce=int)
     bday1_tz = SelectField("Timezone", choices=tzones, default=tzones[11][0], coerce=int)
@@ -41,20 +61,16 @@ class MatchForm(FlaskForm):
 
 
 class ChartForm(FlaskForm):
-    bday = DateField("", format="%Y-%m-%d", default=default_date())
+    hrs = hours()
+    tzones = timezones()
+    bday = DateField("Birth Date", format="%Y-%m-%d", default=default_date())
+    hr = SelectField("Birth Hour", choices=hrs, default=hrs[12][0], coerce=int)
+    tz = SelectField("Timezone", choices=tzones, default=tzones[11][0], coerce=int)
     submit = SubmitField("Calculate!")
 
 
 class SynastryForm(FlaskForm):
-    signs = [
-        ('', ''),
-        ('Aries', 'Aries'), ('Taurus', 'Taurus'),
-        ('Cancer', 'Cancer'), ('Gemini', 'Gemini'),
-        ('Leo', 'Leo'), ('Virgo', 'Virgo'),
-        ('Libra', 'Libra'), ('Scorpio', 'Scorpio'),
-        ('Sagittarius', 'Sagittarius'), ('Capricorn', 'Capricorn'),
-        ('Aquarius', 'Aquarius'), ('Pisces', 'Pisces'),
-    ]
+    signs = signs()
     sun1 = SelectField("Sun", choices=signs, coerce=str)
     sun2 = SelectField("Sun", choices=signs, coerce=str)
     moon1 = SelectField("Moon", choices=signs, coerce=str)
